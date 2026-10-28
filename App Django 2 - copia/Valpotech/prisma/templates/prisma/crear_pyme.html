@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar PyMe - Valpotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light py-5">
+
+    <div class="container" style="max-width: 600px;">
+        <div class="card shadow-sm border-0 p-4 rounded-4 bg-white">
+            <h3 class="fw-bold text-dark mb-4 text-center">Registrar Nueva PyMe</h3>
+
+            {% if error %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endif %}
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="nombre_negocio" class="form-label fw-semibold">Nombre del Negocio</label>
+                    <input type="text" class="form-control" id="nombre_negocio" name="nombre_negocio" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rut" class="form-label fw-semibold">RUT</label>
+                    <input type="text" class="form-control" id="rut" name="rut" placeholder="Ej: 76.543.210-k" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="comuna" class="form-label fw-semibold">Comuna</label>
+                    <input type="text" class="form-control" id="comuna" name="comuna" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rubro" class="form-label fw-semibold">Rubro</label>
+                    <input type="text" class="form-control" id="rubro" name="rubro" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label fw-semibold">Descripción del Negocio</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="logo" class="form-label fw-semibold">Logo de la PyMe</label>
+                    <input type="file" class="form-control" id="logo" name="logo">
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'listar_pymes' %}" class="btn btn-outline-secondary rounded-pill px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold">Registrar PyMe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

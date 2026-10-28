@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Regional - Valpotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light py-5">
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary"><i class="fa-solid fa-chart-pie me-2"></i>Dashboard y Métricas Regionales</h2>
+            <a href="{% url 'listar_pymes' %}" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i> Volver al Inicio</a>
+        </div>
+        <p class="text-muted">Resumen estadístico de madurez digital en la Región de Valparaíso.</p>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 bg-primary text-white p-4 rounded-4">
+                    <h3 class="fw-bold">{{ total_pymes }}</h3>
+                    <p class="mb-0">Total PyMEs Registradas</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 bg-success text-white p-4 rounded-4">
+                    <h3 class="fw-bold">{{ total_diagnosticos }}</h3>
+                    <p class="mb-0">Total Evaluaciones Realizadas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card shadow border-0 p-4 rounded-4 bg-white">
+                    <h4 class="fw-bold mb-3">Madurez Promedio por Comuna</h4>
+                    <ul class="list-group list-group-flush">
+                        {% for item in por_comuna %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                {{ item.pyme__comuna }}
+                                <span class="badge bg-primary rounded-pill px-3 py-2">{{ item.promedio_puntaje|floatformat:1 }} pts ({{ item.total }} diag.)</span>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted text-center py-3">No hay datos registrados aún.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow border-0 p-4 rounded-4 bg-white">
+                    <h4 class="fw-bold mb-3">Distribución por Niveles</h4>
+                    <ul class="list-group list-group-flush">
+                        {% for item in niveles %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                {{ item.nivel_obtenido }}
+                                <span class="badge bg-success rounded-pill px-3 py-2">{{ item.total }} PyMEs</span>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item text-muted text-center py-3">No hay datos registrados aún.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

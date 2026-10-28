@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnóstico de Madurez Digital - Valpotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .question-card {
+            transition: all 0.2s ease-in-out;
+            border-left: 4px solid #0d6efd !important;
+        }
+        .question-card:hover {
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.08)!important;
+        }
+        .form-check-input:checked + .form-check-label {
+            font-weight: 600;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body class="bg-light py-5">
+
+    <div class="container">
+        <!-- Encabezado superior -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 p-4 bg-white rounded-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary me-3 fs-4">
+                            <i class="bi bi-clipboard-data-fill"></i>
+                        </div>
+                        <div>
+                            <h2 class="fw-bold text-dark mb-1">Diagnóstico de Madurez Digital</h2>
+                            <p class="text-muted mb-0">Responde con honestidad cada pregunta para evaluar el estado actual de tu negocio y recibir recomendaciones precisas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario del Cuestionario -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    {% for pregunta in preguntas %}
+                        <div class="card question-card shadow-sm border-0 p-4 mb-4 rounded-4 bg-white">
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="badge bg-primary rounded-pill me-2 fs-6 px-3 py-2">{{ forloop.counter }}</span>
+                                <h5 class="fw-bold text-dark mb-0 lh-base">{{ pregunta.enunciado }}</h5>
+                            </div>
+                            
+                            <div class="ms-4 ps-2">
+                                {% for opcion in pregunta.opciones.all %}
+                                    <div class="form-check mb-3 py-2 px-3 rounded border border-light bg-light-subtle transition-all">
+                                        <input class="form-check-input mt-1" type="radio" name="pregunta_{{ pregunta.id }}" value="{{ opcion.id }}" id="opcion_{{ opcion.id }}" required style="cursor: pointer;">
+                                        <label class="form-check-label text-secondary ms-2 w-100" for="opcion_{{ opcion.id }}" style="cursor: pointer;">
+                                            {{ opcion.texto_opcion }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="d-grid gap-2 mt-4 mb-5">
+                        <button type="submit" class="btn btn-primary btn-lg py-3 fw-bold rounded-pill shadow">
+                            <i class="bi bi-send-check-fill me-2"></i> Finalizar Diagnóstico y Ver Resultados
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

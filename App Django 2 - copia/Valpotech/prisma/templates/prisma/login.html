@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Valpotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light d-flex align-items-center py-5" style="min-height: 100vh;">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow border-0 p-4">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-primary"><i class="bi bi-shop"></i> Valpotech</h2>
+                        <p class="text-muted">Inicia sesión en tu cuenta</p>
+                    </div>
+
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">{{ error }}</div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nombre de Usuario</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Contraseña</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary py-2 fw-bold">
+                                <i class="bi bi-box-arrow-in-right"></i> Entrar
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="text-muted small">¿No tienes una cuenta? <a href="{% url 'registrar_usuario' %}">Regístrate aquí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

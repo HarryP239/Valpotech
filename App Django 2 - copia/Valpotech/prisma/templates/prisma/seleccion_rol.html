@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecciona tu Perfil - Valpotech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 py-5">
+
+    <div class="container" style="max-width: 700px;">
+        <div class="card shadow border-0 p-5 rounded-4 bg-white text-center">
+            <h2 class="fw-bold text-primary mb-3"><i class="fa-solid fa-rocket text-warning me-2"></i>¡Bienvenido a Valpotech!</h2>
+            <p class="text-muted mb-4 fs-5">Selecciona el tipo de cuenta con el que deseas ingresar a la plataforma:</p>
+
+            <div class="row g-4 mt-2">
+                <!-- Opción PyME -->
+                <div class="col-md-6">
+                    <div class="card h-100 border-2 border-primary shadow-sm p-4 rounded-4 hover-shadow">
+                        <i class="fa-solid fa-store fa-3x text-primary mb-3"></i>
+                        <h4 class="fw-bold">Soy una PyME</h4>
+                        <p class="text-muted small">Registra tu emprendimiento, realiza el autodiagnóstico digital y aparece en el directorio.</p>
+                        <a href="{% url 'crear_pyme' %}" class="btn btn-primary rounded-pill w-100 mt-auto">Registrar mi PyME</a>
+                    </div>
+                </div>
+
+                <!-- Opción Usuario General / Visitante -->
+                <div class="col-md-6">
+                    <div class="card h-100 border-2 border-secondary shadow-sm p-4 rounded-4 hover-shadow">
+                        <i class="fa-solid fa-user fa-3x text-secondary mb-3"></i>
+                        <h4 class="fw-bold">Soy un Usuario</h4>
+                        <p class="text-muted small">Explora el directorio de emprendimientos locales y conecta con los negocios de la región.</p>
+                        <a href="{% url 'listar_pymes' %}" class="btn btn-outline-secondary rounded-pill w-100 mt-auto">Ir al Directorio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
