@@ -89,9 +89,6 @@ def realizar_diagnostico(request, pyme_id):
 
     if request.method == 'POST':
         puntaje_total = 0
-
-        # El formulario envía el ID de la opción elegida; se suma el puntaje real
-        # de esa opción (5, 3 o 1), no el ID.
         for pregunta in preguntas:
             opcion_id = request.POST.get(f'pregunta_{pregunta.id}')
             if opcion_id:
@@ -108,11 +105,6 @@ def realizar_diagnostico(request, pyme_id):
         else:
             nivel = 'Avanzado'
 
-        # CORREGIDO: antes usaba get_or_create, que se caía si la PyMe tenía más de un
-        # diagnóstico, y guardaba en campos que no existen (puntaje / nivel), por lo que
-        # el diagnóstico quedaba siempre en 0 puntos.
-        # Ahora cada PyMe guarda un solo diagnóstico: se borra el anterior y se guarda el nuevo
-        # en los campos reales del modelo (puntaje_total / nivel_obtenido).
         Diagnostico.objects.filter(pyme=pyme).delete()
         Diagnostico.objects.create(
             pyme=pyme,
@@ -327,4 +319,4 @@ def crear_publicacion(request, pyme_id):
         )
         return redirect('detalle_pyme', pyme_id=pyme.id)
         
-    return render(request, 'prisma/crear_publicacion.html', {'pyme': pyme})
+    return render(request, 'prisma/crear_publicacion.html', {'pyme': pyme})
